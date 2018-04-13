@@ -33,4 +33,4 @@ app.post('/add', exampleController.storeEntry)
 app.post('/update', exampleController.updateEntry)
 app.post('/delete', exampleController.deleteEntry)
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(process.env.PORT || 3000, () => console.log('Example app is running'))
