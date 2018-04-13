@@ -1,0 +1,33 @@
+{
+  "name": "node-express-mongoose-boiler",
+  "version": "1.0.0",
+  "description": "Boiler plate for an express server coupled with mongoose",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boxpositron/heroku-node-express-mongoose.git"
+  },
+  "keywords": [
+    "mongoose",
+    "node",
+    "mongodb",
+    "express",
+    "heroku"
+  ],
+  "author": "Ibia David",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/boxpositron/heroku-node-express-mongoose/issues"
+  },
+  "homepage": "https://github.com/boxpositron/heroku-node-express-mongoose#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.14"
+  }
+}
