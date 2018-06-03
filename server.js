@@ -1,36 +1,48 @@
-require('dotenv').load();
+require('dotenv').load()
 const express = require('express')
-var bodyParser = require('body-parser')
-const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const openPort = require('first-open-port')
 
-const exampleController = require('./controllers/exampleController')
 
+const defaultPort = process.env.PORT || 3000
 const app = express()
 
 
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
-    extended: true
-})); 
+	extended: true
+})) 
 
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise
 
 const mongoOptions = {}
 mongoose.connect(process.env.MONGODB_URI,mongoOptions)
 mongoose.connection.on('error', err => {
-    console.error(`MongoDB connection error: ${err}`);
-    process.exit(1);
-});
+	//eslint-disable-next-line no-console
+	console.error(`MongoDB connection error: ${err}`)
+	process.exit(1)
+})
+
+app.use((req, res, next) => {
+	// res.header("Access-Control-Allow-Credentials", true); //Useful when performing cross domain auth 
+	res.setHeader('X-Powered-By', '')
+	next()
+})
 
 
-app.route('/')
-    .get((req, res) => res.send('get ok'))
-    .post((req,res) => res.send('post ok'))
+const exampleRouter = express.Router()
+require('./routes/example')(exampleRouter)
 
-app.get('/all', exampleController.getEntries)
+app.use('/',exampleRouter)
 
-app.post('/add', exampleController.storeEntry)
-app.post('/update', exampleController.updateEntry)
-app.post('/delete', exampleController.deleteEntry)
+/* eslint-disable no-console */
+openPort(defaultPort)
+	.then(port=>{
+		app.listen(port, () => console.log(`Your application is running on http://localhost:${port}`))
+	})
+	.catch(err=>{
+		console.error(`An error occurred ::${err}`)
+	})
 
-app.listen(process.env.PORT || 3000, () => console.log('Example app is running'))
+/* eslint-enable no-console */
