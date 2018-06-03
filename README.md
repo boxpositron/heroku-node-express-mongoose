@@ -27,10 +27,20 @@ const exampleSchema = new Schema({
 ## Installation
 
 >Enter the following commands into your terminal
-```shell
-git clone https://github.com/boxpositron/heroku-node-express-mongoose project-name
-cd project-name
-npm install
-echo MONGODB_URI='your mongodb uri' >> .env
-node server.js
+```sh
+$ git clone https://github.com/boxpositron/heroku-node-express-mongoose project-name
+$ cd project-name
+$ npm install
+$ echo MONGODB_URI='your mongodb uri' >> .env
+$ node server.js
 ```
+
+## Debugging
+
+>This template is optimized for debugging with vscode and nodemon.
+>If you do not have nodemon installed, you can enter the following command in your terminal application 
+
+```sh
+$ npm i -g nodemon
+```
+
